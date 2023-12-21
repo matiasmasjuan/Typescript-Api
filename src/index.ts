@@ -2,7 +2,7 @@ import http from 'http';
 import express from 'express';
 import bodyParser from 'body-parser';
 import { Request, Response } from 'express';
-const port = 3000;
+import { port } from './config';
 
 const app = express();
 
