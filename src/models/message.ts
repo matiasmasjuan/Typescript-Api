@@ -1,46 +1,52 @@
-import { Model, Sequelize, DataTypes } from 'sequelize';
+import { Model, DataTypes } from 'sequelize';
 import Client from './client';
 import sequelize from '../db/database'
 
-
-export default class Message extends Model {
+class Message extends Model {
   public id?: number;
   public clientId?: number;
   public text!: string;
-  public role!: 'client' | 'agent';
+  public role!: 'Client' | 'Agent';
   public sentAt!: Date;
 
   static associate(models: any) {
-    Message.belongsTo(models.Client, { foreignKey: 'clientId' });
+    Message.belongsTo(Client, { foreignKey: 'clientId' });
   }
 }
 
-export const MessageMap = (sequelize: Sequelize) => {
-  Message.init({
+Message.init(
+  {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
-      primaryKey: true
+      primaryKey: true,
+    },
+    clientId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
     text: {
       type: DataTypes.STRING(255),
-      allowNull: false
+      allowNull: false,
     },
     role: {
       type: DataTypes.STRING(20),
       allowNull: false,
       validate: {
-        isIn: [['client', 'agent']]
-      }
+        isIn: [['Client', 'Agent']],
+      },
     },
     sentAt: {
       type: DataTypes.DATE,
-      allowNull: false
-    }
-  }, {
+      allowNull: false,
+    },
+  },
+  {
     sequelize,
     tableName: 'messages',
-    timestamps: false
-  });
-  Message.sync();
-}
+    timestamps: false,
+  }
+);
+
+export default Message;
+

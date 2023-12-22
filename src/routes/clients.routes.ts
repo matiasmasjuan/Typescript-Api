@@ -1,19 +1,16 @@
 import { Router, Request, Response } from 'express';
-import Client, { ClientMap } from '../models/client';
-import database from '../db/database';
+import Client from '../models/client'
+import Message from '../models/message';
 
 const router = Router();
-ClientMap(database);
 
 // GET - clients
 router.get('/', async (req: Request, res: Response) => {
   try {
     const result = await Client.findAll({
-      // include: Message,
+      include: Message,
     });
-    const clientsWithMessages = result.map((client) => client.get({ plain: true }));
-    res.status(200).json(clientsWithMessages);
-    // res.status(200).json(result);
+    res.status(200).json(result);
   } catch (error) {
     console.error('Error getting clients:', error);
     res.status(500).json({ error: 'Internal Server Error' });
@@ -24,7 +21,9 @@ router.get('/', async (req: Request, res: Response) => {
 router.get('/:id', async (req: Request, res: Response) => {
   try {
     const id = Number(req.params.id);
-    const client = await Client.findByPk(id);
+    const client = await Client.findByPk(id, {
+      include: Message
+    });
     if (client) {
       res.status(200).json(client);
     } else {
