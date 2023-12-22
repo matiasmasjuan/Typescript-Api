@@ -8,6 +8,9 @@ CREATE TABLE "public"."clients" (
     "savings" integer NOT NULL
 ) WITH (oids = false);
 
+ALTER TABLE "public"."clients"
+ADD CONSTRAINT "clients_id_unique" UNIQUE ("id");
+
 INSERT INTO "clients" ("name", "rut", "salary", "savings") VALUES
 ('Juan Perez', '11.111.111-1', 50000, 10000),
 ('Pedro Soto', '21.111.111-1', 60000, 15000),

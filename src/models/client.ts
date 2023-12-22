@@ -6,6 +6,10 @@ export default class Client extends Model {
   public rut!: string;
   public salary!: number;
   public savings!: number;
+
+  static associate(models: any) {
+    Client.hasMany(models.Message, { foreignKey: 'clientId' });
+  }
 }
 
 export const ClientMap = (sequelize: Sequelize) => {

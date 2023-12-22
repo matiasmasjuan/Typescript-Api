@@ -5,6 +5,7 @@ import { Request, Response } from 'express';
 import { port } from './config';
 
 import clientsRoutes from './routes/clients.routes';
+import messagesRoutes from './routes/messages.routes';
 
 const app = express();
 
@@ -13,6 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Routes
 app.use('/clients', clientsRoutes);
+app.use('/messages', messagesRoutes);
 
 app.get('/', async (req: Request, res: Response) => {
   res.status(200).json({

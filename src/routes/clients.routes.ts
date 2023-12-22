@@ -8,8 +8,12 @@ ClientMap(database);
 // GET - clients
 router.get('/', async (req: Request, res: Response) => {
   try {
-    const result = await Client.findAll();
-    res.status(200).json(result);
+    const result = await Client.findAll({
+      // include: Message,
+    });
+    const clientsWithMessages = result.map((client) => client.get({ plain: true }));
+    res.status(200).json(clientsWithMessages);
+    // res.status(200).json(result);
   } catch (error) {
     console.error('Error getting clients:', error);
     res.status(500).json({ error: 'Internal Server Error' });
