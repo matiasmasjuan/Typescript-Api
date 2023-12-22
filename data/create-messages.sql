@@ -18,5 +18,5 @@ INSERT INTO "messages" ("clientId", "text", "role", "sentAt") VALUES
 (1, 'Perfecto, te puedo ayudar con eso', 'agent', '2023-01-02 14:30:00'),
 (1, 'Quiero uno en la comuna de la florida', 'client', '2023-01-03 09:45:00'),
 (1, 'Claro! tengo este por 3000 UF', 'agent', '2023-01-04 18:20:00'),
-(2, 'Hola, hay alguna casa en Macul?', 'client', '2023-01-05 11:10:00'),
-(2, 'Claro! Feliz de ayudar', 'agent', '2023-01-06 16:05:00');
+(2, 'Hola, hay alguna casa en Macul?', 'client', '2023-12-20 11:10:00'),
+(2, 'Claro! Feliz de ayudar', 'agent', '2023-12-21 16:05:00');

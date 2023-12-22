@@ -7,6 +7,7 @@ import { port } from './config';
 import clientsRoutes from './routes/clients.routes';
 import messagesRoutes from './routes/messages.routes';
 import debtsRoutes from './routes/debts.routes';
+import followUpRoutes from './routes/follow-up.routes';
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/clients', clientsRoutes);
 app.use('/messages', messagesRoutes);
 app.use('/debts', debtsRoutes);
+app.use('/clients-to-do-follow-up', followUpRoutes);
 
 app.get('/', async (req: Request, res: Response) => {
   res.status(200).json({

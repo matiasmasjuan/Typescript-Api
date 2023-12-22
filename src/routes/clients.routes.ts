@@ -8,9 +8,7 @@ const router = Router();
 // GET - clients
 router.get('/', async (req: Request, res: Response) => {
   try {
-    const result = await Client.findAll({
-      include: [Message, Debt]
-    });
+    const result = await Client.findAll();
     res.status(200).json(result);
   } catch (error) {
     console.error('Error getting clients:', error);
