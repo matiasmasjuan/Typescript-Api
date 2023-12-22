@@ -1,6 +1,7 @@
 import { Router, Request, Response } from 'express';
 import Client from '../models/client'
 import Message from '../models/message';
+import Debt from '../models/debt';
 
 const router = Router();
 
@@ -8,7 +9,7 @@ const router = Router();
 router.get('/', async (req: Request, res: Response) => {
   try {
     const result = await Client.findAll({
-      include: Message,
+      include: [Message, Debt]
     });
     res.status(200).json(result);
   } catch (error) {
@@ -22,8 +23,8 @@ router.get('/:id', async (req: Request, res: Response) => {
   try {
     const id = Number(req.params.id);
     const client = await Client.findByPk(id, {
-      include: Message
-    });
+      include: [Message, Debt]
+    },);
     if (client) {
       res.status(200).json(client);
     } else {

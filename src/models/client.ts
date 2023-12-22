@@ -1,6 +1,7 @@
 import { Model, DataTypes } from 'sequelize';
 import sequelize from '../db/database'
 import Message from './message';
+import Debt from './debt';
 
 class Client extends Model {
   public id?: number;
@@ -11,6 +12,7 @@ class Client extends Model {
 
   static associate(models: any) {
     Client.hasMany(Message, { foreignKey: 'clientId' });
+    Client.hasMany(Debt, { foreignKey: 'clientId' });
   }
 }
 
@@ -47,6 +49,7 @@ Client.init(
 );
 
 Client.hasMany(Message, { foreignKey: 'clientId' });
+Client.hasMany(Debt, { foreignKey: 'clientId' });
 
 export default Client;
 

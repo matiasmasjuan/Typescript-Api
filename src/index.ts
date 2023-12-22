@@ -6,6 +6,7 @@ import { port } from './config';
 
 import clientsRoutes from './routes/clients.routes';
 import messagesRoutes from './routes/messages.routes';
+import debtsRoutes from './routes/debts.routes';
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Routes
 app.use('/clients', clientsRoutes);
 app.use('/messages', messagesRoutes);
+app.use('/debts', debtsRoutes);
 
 app.get('/', async (req: Request, res: Response) => {
   res.status(200).json({
