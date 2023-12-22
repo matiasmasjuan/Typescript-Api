@@ -10,7 +10,7 @@ class Debt extends Model {
   public dueDate!: Date;
 
   static associate(models: any) {
-    Debt.belongsTo(Client, { foreignKey: 'clientId' });
+    Debt.belongsTo(Client, { foreignKey: 'clientId', as: 'client' });
   }
 }
 

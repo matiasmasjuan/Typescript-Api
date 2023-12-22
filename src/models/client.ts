@@ -9,10 +9,11 @@ class Client extends Model {
   public rut!: string;
   public salary!: number;
   public savings!: number;
+  [Message: string]: any; 
 
   static associate(models: any) {
-    Client.hasMany(Message, { foreignKey: 'clientId' });
-    Client.hasMany(Debt, { foreignKey: 'clientId' });
+    Client.hasMany(Message, { foreignKey: 'clientId', as: 'messages' });
+    Client.hasMany(Debt, { foreignKey: 'clientId', as: 'debts' });
   }
 }
 
@@ -48,8 +49,8 @@ Client.init(
 
 );
 
-Client.hasMany(Message, { foreignKey: 'clientId' });
-Client.hasMany(Debt, { foreignKey: 'clientId' });
+Client.hasMany(Message, { foreignKey: 'clientId', as: 'messages' });
+Client.hasMany(Debt, { foreignKey: 'clientId', as: 'debts' });
 
 export default Client;
 

@@ -52,4 +52,35 @@ router.post('/', async (req: Request, res: Response) => {
   }
 });
 
+// GET - clients/:id/score
+router.get('/:id/score', async (req: Request, res: Response) => {
+  try {
+    const id = Number(req.params.id);
+    const client = await Client.findByPk(id, {
+      include:[
+      {
+        model: Message,
+        as: 'messages'
+      },
+      {
+        model: Debt,
+        as: 'debts'
+      },
+    ]
+    },);
+    if (client) {
+      let score = 0;
+      // Get Score By Messages: 20%
+      // Get Score By SalaryDebt difference: 50%
+      // Get Score By Savings Score: 30%
+      res.status(200).json({score});
+    } else {
+      res.status(404).json({ error: `No client with the id ${id}` });
+    }
+  } catch (error) {
+    console.error('Error finding the client:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 export default router;

@@ -10,7 +10,7 @@ class Message extends Model {
   public sentAt!: Date;
 
   static associate(models: any) {
-    Message.belongsTo(Client, { foreignKey: 'clientId' });
+    Message.belongsTo(Client, { foreignKey: 'clientId', as: 'client' });
   }
 }
 
